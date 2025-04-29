@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Send email
         $mail = new PHPMailer(true);
         try {
+            //just need the host
             $mail->isSMTP();
             $mail->Host = 'smtp.example.com';
             $mail->SMTPAuth = true;
