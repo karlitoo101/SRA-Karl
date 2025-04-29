@@ -31,12 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Send email
         $mail = new PHPMailer(true);
         try {
-            //just need the host
             $mail->isSMTP();
             $mail->Host = 'smtp.example.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'karl.mangapot@email.com';
-            $mail->Password = 'sra';
+            $mail->Username = 'your@email.com';
+            $mail->Password = 'your_password';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
