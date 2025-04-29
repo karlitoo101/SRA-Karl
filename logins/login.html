@@ -33,7 +33,7 @@
             </div>
             
             <div class="forgot-password">
-                <a href="#" id="forgotPasswordLink">Forgot password</a>
+                <a href="" id="forgotPasswordLink">Forgot password</a>
             </div>
             
             <button type="submit" class="login-btn">LOG IN</button>
@@ -58,20 +58,8 @@
         forgotPasswordLink.addEventListener('click', (e) => {
             e.preventDefault();
             
-            // Get the email value
-            const email = emailInput.value.trim();
-            
-            if (email === '') {
-                alert('Please enter your email address first');
-                emailInput.focus();
-                return;
-            }
-            
-            // Store email in localStorage to access it from the verification page
-            localStorage.setItem('resetEmail', email);
-            
             // Redirect to verification page - using your specific filename
-            window.location.href = 'forgotpass.html';
+            window.location.href = 'enteremail.html';
         });
         
         loginForm.addEventListener('submit', (e) => {

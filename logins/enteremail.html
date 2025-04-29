@@ -19,10 +19,10 @@
         
         <h1>Forgot password</h1>
         <p class="instruction">Please enter your email to reset the password</p>
-        <form action="" method="">
+        <form action="../backend/resetpass/send_reset.php" method="POST">
             <label class="input-label">Your email</label>
-            <input type="email" class="email-input" placeholder="Enter your email">
-            <button class="reset-btn">RESET PASSWORD</button>
+            <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
+            <button class="reset-btn" type="submit">RESET PASSWORD</button>
         </form>
     </div>
 </body>
