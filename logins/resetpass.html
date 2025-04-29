@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sugar Regulatory Administration - Set New Password</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/resetpass.css">
+</head>
+<body>
+    <a href="forgotpass.html" class="back-button">
+        <i class="fas fa-chevron-left"></i>
+    </a>
+    
+    <div class="logo">
+        <img src="../resources/SRA_thumbnail.png" alt="Department of Agriculture Logo">
+    </div>
+    
+    <div class="content-area">
+        <h1>Set new password</h1>
+        <p class="instruction">Create a new password. Ensure it differs from previous ones for security</p>
+        
+        <form id="resetPasswordForm">
+            <div class="form-group">
+                <label for="newPassword">Password</label>
+                <div class="password-input-container">
+                    <input type="password" id="newPassword" class="password-input" placeholder="Enter your new password">
+                    <i class="toggle-password fas fa-eye-slash" onclick="togglePasswordVisibility('newPassword')"></i>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="password-input-container">
+                    <input type="password" id="confirmPassword" class="password-input" placeholder="Re-enter password">
+                    <i class="toggle-password fas fa-eye-slash" onclick="togglePasswordVisibility('confirmPassword')"></i>
+                </div>
+            </div>
+            
+            <button type="button" class="update-btn" onclick="updatePassword()">Update Password</button>
+        </form>
+    </div>
+    
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2 class="modal-title">Password Updated!</h2>
+            <p class="modal-message">Your password has been successfully updated. You can now login with your new password.</p>
+            <button class="login-btn" onclick="redirectToLogin()">Back to Login</button>
+        </div>
+    </div>
+    
+    <script>
+        function togglePasswordVisibility(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const icon = passwordInput.nextElementSibling;
+            
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.classList.replace("fa-eye-slash", "fa-eye");
+            } else {
+                passwordInput.type = "password";
+                icon.classList.replace("fa-eye", "fa-eye-slash");
+            }
+        }
+        
+        function showSuccessModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.add('active');
+        }
+        
+        function redirectToLogin() {
+            window.location.href = 'login.html';
+        }
+        
+        function updatePassword() {
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            const passwordRequirements = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+
+        if (!newPassword || !confirmPassword) {
+            alert('Please fill in all fields');
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
+            alert('Passwords do not match');
+            return;
+        }
+
+        if (!passwordRequirements.test(newPassword)) {
+            alert('Password must be at least 8 characters long, contain at least 1 uppercase letter, and 1 special character.');
+            return;
+        }
+            
+            // Here you would typically send the new password to your backend
+            // For example:
+            // const response = await fetch('/api/reset-password', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ newPassword })
+            // });
+            
+            // If the password update was successful, show the success modal
+            showSuccessModal();
+        }
+    </script>
+</body>
+</html>

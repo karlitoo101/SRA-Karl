@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sugar Regulatory Administration - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-image: url('../resources/bglogin.png');
+            background-size: cover;
+            background-position: center -80px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            padding: 20px;
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin-top: 5px;
+        }
+        
+        .logo {
+            margin-bottom: 10px;
+        }
+        
+        .logo img {
+            width: 160px;
+            height: auto;
+        }
+
+        .TitleText {
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .TitleText h1 {
+            font-size: 35px;
+            margin-bottom: 30px;
+            font-weight: 800;
+            text-transform: uppercase;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+        
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .form-group {
+            position: relative;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            border: none;
+            border-radius: 50px;
+            background-color: rgba(240, 240, 255, 0.8);
+            font-size: 16px;
+        }
+        
+        .icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #555;
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-top: 5px;
+        }
+        
+        .forgot-password a {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .login-btn {
+            background-color: #008000;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        
+        .login-btn:hover {
+            background-color: #006400;
+        }
+
+        .toggle-password {
+           position: absolute;
+           right: 20px;
+           top: 50%;
+           transform: translateY(-50%);
+           cursor: pointer;
+           color: #555;
+           font-size: 18px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <img src="../resources/SRA_thumbnail.png" alt="Department of Agriculture Logo">
+        </div>
+        
+        <div class="TitleText">
+            <h1>SUGAR REGULATORY ADMINISTRATION</h1>
+        </div>
+        
+        <h2 style="margin-bottom: 30px;">LOG IN</h2>
+        
+        <form class="login-form" id="loginForm">
+            <div class="form-group">
+                <i class="fa-regular fa-envelope icon"></i>
+                <input type="email" class="form-control" id="emailInput" placeholder="Email" required>
+            </div>
+            
+            <div class="form-group">
+                <i class="fa-solid fa-lock icon"></i>
+                <input type="password" class="form-control" id="password" placeholder="Password" required>
+                <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
+                
+            </div>
+            
+            <div class="forgot-password">
+                <a href="#" id="forgotPasswordLink">Forgot password</a>
+            </div>
+            
+            <button type="submit" class="login-btn">LOG IN</button>
+        </form>
+    </div>
+      
+    <script>
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+        const emailInput = document.getElementById('emailInput');
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+        const loginForm = document.getElementById('loginForm');
+    
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            togglePassword.classList.toggle('fa-eye');
+            togglePassword.classList.toggle('fa-eye-slash');
+        });
+        
+        // Handle forgot password link click
+        forgotPasswordLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Get the email value
+            const email = emailInput.value.trim();
+            
+            if (email === '') {
+                alert('Please enter your email address first');
+                emailInput.focus();
+                return;
+            }
+            
+            // Store email in localStorage to access it from the verification page
+            localStorage.setItem('resetEmail', email);
+            
+            // Redirect to verification page - using your specific filename
+            window.location.href = 'forgotpass.html';
+        });
+        
+        loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    fetch('loginprocess.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+    })
+    .then(res => res.text())
+    .then(data => {
+        if (data === "admin") {
+            window.location.href = "../frontend/admin/traderlist.php";
+        } else if (data === "user") {
+            window.location.href = "../frontend/trader/traderdashboard.php";
+        } else {
+            alert(data); // Show error
+        }
+    })
+    .catch(err => {
+        console.error("Login error:", err);
+        alert("An error occurred during login.");
+    });
+});
+
+    </script>
+</body>
+</html>

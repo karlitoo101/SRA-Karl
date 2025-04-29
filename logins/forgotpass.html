@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sugar Regulatory Administration - Forgot Password</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/forgotpass.css">
+</head>
+<body>
+    <a href="login.html" class="back-button">
+        <i class="fas fa-chevron-left"></i>
+    </a>
+    
+    <div class="container">
+        <div class="logo">
+            <img src="../resources/SRA_thumbnail.png" alt="Department of Agriculture Logo">
+        </div>
+        
+        <h1>CHECK YOUR EMAIL</h1>
+        <p class="instruction">We sent a reset link to <strong id="userEmail">contact@idscode...com</strong><br>enter 6 digit code that mentioned in the email</p>
+        
+        <div class="code-input-container">
+            <input type="text" maxlength="1" class="code-input" onkeyup="moveToNext(this, 1)">
+            <input type="text" maxlength="1" class="code-input" onkeyup="moveToNext(this, 2)">
+            <input type="text" maxlength="1" class="code-input" onkeyup="moveToNext(this, 3)">
+            <input type="text" maxlength="1" class="code-input" onkeyup="moveToNext(this, 4)">
+            <input type="text" maxlength="1" class="code-input" onkeyup="moveToNext(this, 5)">
+            <input type="text" maxlength="1" class="code-input" onkeyup="moveToNext(this, 6)">
+        </div>
+        
+        <button type="button" class="verify-btn">Verify Code</button>
+        
+        <div class="resend-container">
+            Haven't got the email yet? <a href="#" class="resend-link">Resend email</a>
+        </div>
+    </div>
+    
+    <!-- Wave effect at the bottom -->
+    <div class="wave-container">
+        <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#00a000" fill-opacity="1" d="M0,224L60,208C120,192,240,160,360,170.7C480,181,600,235,720,245.3C840,256,960,224,1080,197.3C1200,171,1320,149,1380,138.7L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+            <path fill="#008000" fill-opacity="1" d="M0,288L60,277.3C120,267,240,245,360,229.3C480,213,600,203,720,197.3C840,192,960,192,1080,197.3C1200,203,1320,213,1380,218.7L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+        </svg>
+    </div>
+    
+    <script>
+        function moveToNext(field, nextFieldNum) {
+            if (field.value.length >= field.maxLength) {
+                // Find all code input fields
+                const inputs = document.querySelectorAll('.code-input');
+                
+                // If there's a next field, focus on it
+                if (nextFieldNum < inputs.length) {
+                    inputs[nextFieldNum].focus();
+                }
+            }
+            
+            // Allow backspace to go to previous field
+            field.addEventListener('keydown', function(e) {
+                const inputs = document.querySelectorAll('.code-input');
+                if (e.key === 'Backspace' && field.value === '' && nextFieldNum > 0) {
+                    inputs[nextFieldNum - 1].focus();
+                }
+            });
+        }
+        
+        // Display user email from previous page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the email from localStorage
+            const userEmail = localStorage.getItem('resetEmail');
+            const emailElement = document.getElementById('userEmail');
+            
+            // If email exists, display it
+            if (userEmail) {
+                // Display full email if short, or truncate if long
+                if (userEmail.length > 20) {
+                    const atIndex = userEmail.indexOf('@');
+                    if (atIndex > -1) {
+                        const username = userEmail.substring(0, atIndex);
+                        const domain = userEmail.substring(atIndex);
+                        
+                        // Show first 6 chars of username + ... + domain
+                        if (username.length > 6) {
+                            emailElement.textContent = username.substring(0, 6) + '...' + domain;
+                        } else {
+                            emailElement.textContent = userEmail;
+                        }
+                    } else {
+                        emailElement.textContent = userEmail.substring(0, 10) + '...';
+                    }
+                } else {
+                    emailElement.textContent = userEmail;
+                }
+            }
+        });
+        
+        // Handle Verify Code button
+        document.querySelector('.verify-btn').addEventListener('click', function() {
+            const inputs = document.querySelectorAll('.code-input');
+            let code = '';
+            
+            // Collect the code
+            inputs.forEach(input => {
+                code += input.value;
+            });
+            
+            if (code.length === 6) {
+                // Here you would typically validate the code with your backend
+                alert('Code verification would be implemented here. Code entered: ' + code);
+                // Redirect to password reset page or show message
+            } else {
+                alert('Please enter the complete 6-digit code');
+            }
+        });
+        
+        // Handle Resend email link
+        document.querySelector('.resend-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Get email from localStorage
+            const email = localStorage.getItem('resetEmail');
+            
+            if (email) {
+                // Here you would typically resend the code to the user's email
+                alert('A new verification code would be sent to ' + email);
+            } else {
+                alert('Email not found. Please go back to the login page.');
+            }
+        });
+    </script>
+</body>
+</html>

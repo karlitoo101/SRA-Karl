@@ -1,0 +1,595 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background-color: #f7f9fc;
+    position: relative;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    padding: 0 24px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    height: 100px;
+    width: auto;
+}
+
+.nav-section {
+    margin-bottom: 16px;
+}
+
+.nav-group {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #8a94a6;
+    font-weight: 600;
+    padding: 8px 24px;
+    margin-bottom: 8px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    cursor: pointer;
+    color: #4d5a6f;
+    text-decoration: none;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.nav-item:hover {
+    background-color: #f3f4f6;
+    color: #1e293b;
+}
+
+.nav-item.active {
+    background-color: #e9f7ee;
+    color: #00843d;
+    border-left: 3px solid #00843d;
+    font-weight: 600;
+}
+
+.nav-item-content {
+    display: flex;
+    align-items: center;
+}
+
+.nav-icon {
+    font-size: 16px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+}
+
+.nav-icon1 {
+    font-size: 18px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+}
+
+.nav-item span {
+    font-size: 14px;
+}
+
+.arrow-icon {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.user-profile {
+    margin-top: auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #f1f1f5;
+    background-color: #fafbfc;
+}
+
+.user-profile .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background-color: #e9f7ee;
+    color: #00843d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 16px;
+}
+
+.user-profile .user-info {
+    flex-grow: 1;
+}
+
+.user-profile .name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+    line-height: 1.2;
+}
+
+.user-profile .role {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.user-profile .logout {
+    cursor: pointer;
+    color: #64748b;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.page-content {
+    flex-grow: 1;
+    padding: 24px;
+    position: relative;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.page-title {
+    font-size: 25px;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+.page-subtitle {
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 8px 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    width: 300px;
+}
+
+.search-icon {
+    color: #94a3b8;
+    margin-right: 8px;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    font-size: 14px;
+    color: #1e293b;
+}
+
+/* Sort controls styling */
+.sort-controls {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.sort-controls label {
+    font-size: 14px;
+    color: #64748b;
+    margin-right: 8px;
+}
+
+.sort-controls select {
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #1e293b;
+    background-color: white;
+    outline: none;
+    cursor: pointer;
+}
+
+.traders-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.traders-table th {
+    text-align: left;
+    padding: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.traders-table td {
+    padding: 16px;
+    font-size: 14px;
+    color: #1e293b;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.view-reports-btn {
+    background-color: #00843d;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.message-btn {
+    background-color: #00843d;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+}
+.new-indicator {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: -3px;
+    right: -8px;
+    margin-right: 5px;
+}
+
+.message-btn.has-new .new-indicator {
+    display: block;
+}
+
+.report-icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Chat Panel Styles */
+.chat-panel {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    width: 450px;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-panel.active {
+    right: 0;
+}
+
+.chat-header {
+    background-color: #00843d;
+    color: white;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.trader-info {
+    display: flex;
+    align-items: center;
+}
+
+.trader-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #00843d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.trader-details h3 {
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.trader-details p {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.close-chat {
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.2);
+    transition: all 0.2s ease;
+}
+
+.close-chat:hover {
+    background-color: rgba(255,255,255,0.3);
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 16px;
+    overflow-y: auto;
+    background-color: #f9fafb;
+}
+
+/* Container for each message */
+.message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align all messages to the left */
+    margin-bottom: 15px;
+}
+
+/* Adjust message appearance based on sender */
+.message-container.own {
+    align-items: flex-end; /* Left-aligned for sender's own messages */
+}
+
+/* Style for the message bubble */
+.message-container .message {
+    background-color: #f0f0f0;
+    padding: 10px 15px;
+    border-radius: 10px;
+    display: inline-block;
+    word-wrap: break-word;
+    max-width: 80%;
+}
+
+/* For sender's own messages */
+.message-container.own .message {
+    background-color: #d4f7d6; /* Different color for the sender */
+    color: black;
+}
+
+/* Sender's name on top of the message */
+.sender-name {
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 5px;
+    text-align: left;
+    font-size: 0.75em;
+}
+
+/* Meta information (timestamp and status) */
+.meta {
+    font-size: 0.85em;
+    color: #888;
+    display: flex;
+    align-items: center; /* Align them horizontally */
+    gap: 5px;  /* Space between timestamp and status */
+    margin-top: 5px;
+    text-align: left;
+}
+
+.timestamp {
+    font-size: 0.85em;
+    color: #888;
+}
+
+.status {
+    color: #00843d;
+    font-size: 0.85em;
+    font-weight: normal; /* Make it a bit lighter */
+}
+
+/* Adjust the message container for sender's own messages */
+.message-container.own .sender-name {
+    text-align: left; /* Ensure sender's name is left-aligned */
+}
+
+.message-container.own .meta {
+    justify-content: flex-start; /* Ensure meta data is left-aligned */
+}
+
+/* If it's a received message, align to the right */
+.message-container.other {
+    align-items: flex-start; /* Ensure that other (receiver's) messages are aligned left too */
+}
+
+.message-container.other .message {
+    background-color: #e2e0e0;
+}
+
+.chat-input {
+    display: flex;
+    border-top: 1px solid #e0e0e0;
+    padding: 15px;
+}
+
+.chat-input input {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 8px 15px;
+    outline: none;
+}
+
+
+
+.chat-input {
+    padding: 16px;
+    border-top: 1px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+}
+
+.message-input {
+    flex-grow: 1;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 10px 16px;
+    outline: none;
+    font-size: 14px;
+}
+
+.send-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #0b8a1b;
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.send-btn:hover {
+    background-color: #007033;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 999;
+    display: none;
+}
+
+.overlay.active {
+    display: block;
+}
+
+/* Stepper Navigation */
+.stepper-nav {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    background-color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    color: #64748b;
+    font-size: 14px;
+    position: relative;
+}
+
+.step-active {
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.step-divider {
+    margin: 0 12px;
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.step-icon {
+    font-size: 14px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.step-current .step-icon {
+    background-color: #00843d;
+    color: white;
+}
+
+.step-completed .step-icon {
+    background-color: #e9f7ee;
+    color: #00843d;
+}
+
+.step-pending .step-icon {
+    background-color: #f1f5f9;
+    color: #94a3b8;
+}
+.user-info .email {
+    font-size: 13px;
+    font-weight: 400; /* slightly lighter than default */
+    color: #777;       /* softer color for subtle appearance */
+    margin-top: 2px;
+}
