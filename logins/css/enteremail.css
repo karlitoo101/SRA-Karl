@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-image: url('../../resources/bglogin.png');
+    background-size: cover;
+    background-position: center -80px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    margin-top: 50px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo img {
+    width: 140px;
+    height: auto;
+}
+
+h1 {
+    font-size: 35px;
+    font-weight: bolder;
+    margin-bottom: 15px;
+    color: #000000;
+}
+
+.instruction {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.input-label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.email-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    font-size: 14px;
+    background-color: #f8f5ff;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+.email-input:focus {
+    border-color: #008000;
+}
+
+.reset-btn {
+    background-color: #008000;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 14px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.reset-btn:hover {
+    background-color: #006400;
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #333;
+    font-size: 20px;
+}
