@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +8,82 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/enteremail.css">
 </head>
+
 <body>
     <a href="login.html" class="back-button">
         <i class="fas fa-chevron-left"></i>
     </a>
-    
+
     <div class="container">
         <div class="logo">
             <img src="../resources/SRA_thumbnail.png" alt="Department of Agriculture Logo">
         </div>
-        
+
         <h1>Forgot password</h1>
         <p class="instruction">Please enter your email to reset the password</p>
-        <form action="../backend/resetpass/send_reset.php" method="POST">
+        <form id="resetForm" action="../backend/resetpass/send_reset.php" method="POST">
             <label class="input-label">Your email</label>
             <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
             <button class="reset-btn" type="submit">RESET PASSWORD</button>
         </form>
+
     </div>
+
+    <!-- Sending Modal -->
+    <div id="sendingModal" class="modal hidden">
+        <div class="modal-content">
+            <p>Sending reset email...</p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="emailModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Reset Link Sent</h3>
+            <p>Check your email for a reset link.</p>
+            <button id="okButton">OK</button>
+        </div>
+    </div>
+
+
+    <script>
+        document.getElementById('resetForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const sendingModal = document.getElementById('sendingModal');
+            const emailModal = document.getElementById('emailModal');
+
+            // Show "Sending..." modal
+            sendingModal.classList.remove('hidden');
+
+            const form = e.target;
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                sendingModal.classList.add('hidden');
+
+                if (result.success) {
+                    emailModal.classList.remove('hidden');
+                } else {
+                    alert(result.message);
+                }
+            } catch (err) {
+                sendingModal.classList.add('hidden');
+                alert("Something went wrong. Please try again.");
+            }
+        });
+
+        document.getElementById('okButton').addEventListener('click', function () {
+            window.location.href = 'login.html';
+        });
+    </script>
+
+
 </body>
+
 </html>

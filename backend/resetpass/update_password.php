@@ -14,7 +14,7 @@ if (!$token || !$newPassword) {
 $tokenHash = hash('sha256', $token);
 
 // Check if token is valid
-$stmt = $conn->prepare("SELECT userID FROM users WHERE reset_token_hash = ? AND reset_token_expires_at > NOW()");
+$stmt = $conn->prepare("SELECT userID FROM users WHERE reset_token_hash = ? AND reset_token_expires_at < NOW()");
 $stmt->bind_param("s", $tokenHash);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -30,6 +30,6 @@ if ($row = $result->fetch_assoc()) {
 
     echo json_encode(["success" => true]);
 } else {
-    echo json_encode(["success" => false, "message" => "Invalid or expired token."]);
+    echo json_encode(["success" => false, "message" => "Invali or expired token."]);
 }
 ?>
