@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
-            $mail->setFrom('mangapot.karljhon.abano@email.com', 'Your App');
+            $mail->setFrom('', 'Your App');
             $mail->addAddress($email);
             $mail->isHTML(true);
             $mail->Subject = 'Reset Your Password';
